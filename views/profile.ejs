@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="container">
+
+    <div class="page-header text-center">
+      <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+      <button class="btn btn-default btn-sm" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="row">
+
+      <!-- FACEBOOK INFORMATION -->
+      <div class="col-sm-6">
+        <div class="well">
+          <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+          <p>
+            <strong>name</strong>: <%= user.displayName %><br>
+            <strong>Email</strong>: <%= user.emails[0].value %><br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="token" data-token="<%= token %>" style="display:none"></div>
+  <script type="text/javascript">
+    localStorage['passportJWT'] = token.dataset.token;
+
+    logout = function(){
+      localStorage.removeItem('passportJWT');
+      document.location = "/"
+    }
+  </script>
+</body>
+</html>
