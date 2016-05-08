@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var expressSession = require('express-session');
 var mongoose = require('mongoose');
 var expressJWT = require('express-jwt');
 
@@ -9,6 +10,8 @@ mongoose.connect('mongodb://localhost/facebook-auth-fun');
 var app = express();
 
 var User = require('./UserModel')
+
+app.use(expressSession({ secret: 'mySecretKey' }));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -34,6 +37,15 @@ passport.use(new FacebookStrategy({
   profileFields: ['id', 'displayName', 'photos', 'email']
 },
 function(accessToken, refreshToken, profile, done){
+  console.log("accessToken:");
+  console.log(accessToken);
+
+  console.log("refreshToken:");
+  console.log(refreshToken);
+
+  console.log("profile:");
+  console.log(profile);
+
   return done(null, profile);
 }
 ));
@@ -53,6 +65,7 @@ app.get('/profile', function(req, res) {
       user.id = req.user.id;
       user.displayName = req.user.displayName;
       user.emails = req.user.emails;
+      user.photos = req.user.photos;
       user.save(function(err, user){
         if (err) { return next(err); }
       })

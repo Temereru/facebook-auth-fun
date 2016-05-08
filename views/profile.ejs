@@ -18,10 +18,11 @@
       <div class="col-sm-6">
         <div class="well">
           <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-          <p>
+          <p style="display: inline-block">
             <strong>name</strong>: <%= user.displayName %><br>
             <strong>Email</strong>: <%= user.emails[0].value %><br>
           </p>
+          <img src="<%= user.photos[0].value %>">
         </div>
       </div>
     </div>

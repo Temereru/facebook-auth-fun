@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
   id: String,
   displayName: String,
-  emails: Array
+  emails: Array,
+  photos: Array
 });
 
 UserSchema.methods.generateJWT = function() {
